@@ -18,4 +18,7 @@ I’d love your feedback on the challenges and how I can make them better to hel
 
 ## The Coding Challenges
 *Problem Statement*
-1. [Write Your Own wc Tool](https://codingchallenges.fyi/challenges/challenge-wc)
+
+| Index | Problem Statement | Solution's |
+| :---: |     :---:         |   :---:         |
+| 1     | [Write Your Own wc Tool](https://codingchallenges.fyi/challenges/challenge-wc) | [Python](./1-write-your-own-wc-tool/Python-Solution), [Go](1-write-your-own-wc-tool/Go-Solution)    |
