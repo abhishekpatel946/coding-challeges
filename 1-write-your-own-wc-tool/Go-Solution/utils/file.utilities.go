@@ -6,31 +6,37 @@ import (
 	"log"
 	"os"
 )
- 
 
-func getFileInformation(filename string) {
+func GetFileInformation(filename string) (string, error) {
 	fileInfo, err := os.Stat(filename)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Log the basic information about the file
-	fmt.Print("\nInformation \n")
-	fmt.Println(" File Name: ", fileInfo.Name())
-	fmt.Println(" Permissions: ", fileInfo.Mode())
-	fmt.Println(" Last Modified: ", fileInfo.ModTime())
-}
+	// prepate the return message
+	message := fmt.Sprint("\nInformation",
+		"\n File Name: ", fileInfo.Name(),
+		"\n Permissions: ", fileInfo.Mode(),
+		"\n Last Modified: ", fileInfo.ModTime(),
+	)
 
-func getFileSize(filename string) (string, error) {
-	fileInfo, err := os.Stat(filename)
-	if err != nil {
-		log.Fatal(err)
-	}
 	// return
-	return "\n Size (in bytes): " + string(rune(fileInfo.Size())), nil
+	return message, err
 }
 
-func getFileLines(filename string) (string, error) {
+func GetFileSize(filename string) (string, error) {
+	fileInfo, err := os.Stat(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// prepate the return message
+	message := fmt.Sprintf("\n Size (in bytes): %d", fileInfo.Size())
+
+	// return
+	return message, err
+}
+
+func GetFileLines(filename string) (string, error) {
 	// initiate file-hanndle to read from
 	file, err := os.Open(filename)
 
@@ -54,11 +60,14 @@ func getFileLines(filename string) (string, error) {
 	// make sure to close the file-hanlde upon return
 	defer file.Close()
 
+	// prepate the return message
+	message := fmt.Sprintf("\n Total lines: %d", lineCount)
+
 	// return
-	return "\n Total lines: " + string(lineCount), nil
+	return message, err
 }
 
-func getFileCharacters(filename string) (string, error) {
+func GetFileCharacters(filename string) (string, error) {
 	// initiate the file-hanndle to read from
 	file, err := os.Open(filename)
 	if err != nil {
@@ -80,10 +89,14 @@ func getFileCharacters(filename string) (string, error) {
 	// make sure to close the file-handle upon return
 	defer file.Close()
 
-	return "\n Total characters: " + string(rune(charCount)), nil
+	// prepate the return message
+	message := fmt.Sprintf("\n Total characters: %d", charCount)
+
+	// return
+	return message, err
 }
 
-func getFileWords(filename string) (string, error) {
+func GetFileWords(filename string) (string, error) {
 	// initiate file-handle to read from
 	file, err := os.Open(filename)
 
@@ -112,5 +125,9 @@ func getFileWords(filename string) (string, error) {
 	// make to close file-handle upon return
 	defer file.Close()
 
-	return "\n Total words: " + string(rune(wordCount)), nil
+	// prepate the return message
+	message := fmt.Sprintf("\n Total words: %d", wordCount)
+
+	// return
+	return message, err
 }

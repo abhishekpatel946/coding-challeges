@@ -1,11 +1,12 @@
 package main
 
 import (
-	"bufio"
 	"errors"
 	"fmt"
 	"log"
 	"os"
+
+	"github.com/abhishekpatel946/1-write-your-own-wc-tool/utils"
 )
 
 // Configuration
@@ -36,107 +37,46 @@ func ConvertStrToBool(s string) (bool, error) {
 }
 
 func wc(filename string, _bytes bool, _lines bool, _characters bool, _words bool) {
-	fileInfo, err := os.Stat(filename)
+	res, err := utils.GetFileInformation(filename)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	// Log the basic information about the file
-	fmt.Print("\nInformation \n")
-	fmt.Println(" File Name: ", fileInfo.Name())
-	fmt.Println(" Permissions: ", fileInfo.Mode())
-	fmt.Println(" Last Modified: ", fileInfo.ModTime())
+	fmt.Println(res)
 
 	// get the size of the file
 	if _bytes {
-		fmt.Println("\n Size (in bytes): ", fileInfo.Size())
+		res, err := utils.GetFileSize(filename)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(res)
 	}
 
 	// get the total no of lines in the file
 	if _lines {
-		// initiate file-hanndle to read from
-		file, err := os.Open(filename)
-
-		// check if file-handle was initiated correctly
+		res, err := utils.GetFileLines(filename)
 		if err != nil {
 			log.Fatal(err)
 		}
-
-		// initiate scanner from file-handle
-		fileScanner := bufio.NewScanner(file)
-
-		// tell the scanner to split by lines
-		fileScanner.Split(bufio.ScanLines)
-
-		// initiate the counter & looping through lines
-		lineCount := 0
-		for fileScanner.Scan() {
-			lineCount += 1
-		}
-
-		// make sure to close the file-hanlde upon return
-		defer file.Close()
-
-		fmt.Println("\n Total lines: ", lineCount)
+		fmt.Println(res)
 	}
 
 	// get the total no of chars in the file
 	if _characters {
-		// initiate the file-hanndle to read from
-		file, err := os.Open(filename)
+		res, err := utils.GetFileCharacters(filename)
 		if err != nil {
 			log.Fatal(err)
 		}
-
-		// initiate the scanner from file-handle
-		fileScanner := bufio.NewScanner(file)
-
-		// tell the scanner to split the chars
-		fileScanner.Split(bufio.ScanRunes)
-
-		// initiate the counter & looping through the runes(ASCII) / character
-		charCount := 0
-		for fileScanner.Scan() {
-			charCount += 1
-		}
-
-		// make sure to close the file-handle upon return
-		defer file.Close()
-
-		fmt.Println("\n Total characters: ", charCount)
+		fmt.Println(res)
 	}
 
 	// get the total no of words in the file
 	if _words {
-		// initiate file-handle to read from
-		file, err := os.Open(filename)
-
-		// check if file-handle was initiated correctly
+		res, err := utils.GetFileWords(filename)
 		if err != nil {
 			log.Fatal(err)
 		}
-
-		// initiate scanner from file-handle
-		fileScanner := bufio.NewScanner(file)
-
-		// tell the scanner to split by words
-		fileScanner.Split(bufio.ScanWords)
-
-		// initiate counter & looping through words
-		wordCount := 0
-		for fileScanner.Scan() {
-			wordCount += 1
-		}
-
-		// check if there was error while reading words from file
-		if err := fileScanner.Err(); err != nil {
-			log.Fatal(err)
-		}
-
-		// make to close file-handle upon return
-		defer file.Close()
-
-		fmt.Println("\n Total words: ", wordCount)
+		fmt.Println(res)
 	}
 }
 
@@ -149,7 +89,6 @@ func checkFileExists(filepath string) (bool, error) {
 	} else {
 		return false, err
 	}
-	// return !errors.Is(err, os.ErrNotExist), fileNotFound
 }
 
 // main function
