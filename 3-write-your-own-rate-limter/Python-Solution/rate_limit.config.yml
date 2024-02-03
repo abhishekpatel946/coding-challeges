@@ -1,0 +1,30 @@
+name: Rate Limiter Configuration
+version: 1.0
+
+ratelimiter:
+    name: sample-rate-limiter-configuration
+    algorithm:
+        token_bucket:
+            active: enabled
+            # capacity: 10
+            # refresh_interval: 60000
+            endpoints:
+                endpoint: limited
+                limit: 10
+                interval: 60000
+        leaky_bucket_mirror:
+            active: disabled
+        leaky_bucket_queue:
+            active: disabled
+        sliding_window_log:
+            active: disabled
+        sliding_window_counter:
+            active: disabled
+
+redis:
+    name: sample-redis-configuration
+    environment:
+        hostname: localhost
+        port: 6379
+        interval: 60000
+        label: development
