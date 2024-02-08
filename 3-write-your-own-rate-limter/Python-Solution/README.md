@@ -1,20 +1,3 @@
-### Basic things
-
-1. setup.py - x
-2. README.md - x
-3. LICENSE - x
-4. Code
-5. MANIFEST.in
-6. setup.cfg
-7. requirements.txt
-8. dev-dependencies
-9. Dockerfile / docker-compose
-
-### additional things
-
-1. pyproject.toml
-2. tesing configuration
-4. linting configuration
 
 # Rate Limiter
 
@@ -50,8 +33,8 @@ ratelimiter:
     algorithm:
         token_bucket: 
             active: enable,
-            capacity: 10,
-            refresh_interval: 1000 * 60
+            capacity: 10,        # no of requests per seconds
+            refresh_interval: 60 # in seconds
         leaky_bucket_mirror:
             active: disable,
         leaky_bucket_queue:
@@ -73,25 +56,46 @@ redis:
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Install the repository
 
 ```bash
-pip install foobar
+git clone https://github.com/abhishekpatel946/coding-challeges
 ```
 
-## Usage
+Go to the following directory
 
-```python
-import foobar
+```bash
+cd /3-write-your-own-rate-limter/Python-Solution
+```
 
-# returns 'words'
-foobar.pluralize('word')
+Install the respective packages
 
-# returns 'geese'
-foobar.pluralize('goose')
+```bash
+pip3 install -r requirements.txt
+```
 
-# returns 'phenomenon'
-foobar.singularize('phenomena')
+Launch the redis server for local testing, if redis-server not available please install it first [download & installation](https://redis.io/docs/install/install-redis/)
+
+```bash
+redis-server
+```
+
+Launch the server
+
+```bash
+uvicorn main:app --reload
+```
+
+Open the swagger documentation on locally to check health information
+
+```bash
+http://127.0.0.1:8000/
+```
+
+Open the rate limiting endpoint
+
+```bash
+http://127.0.0.1:8000/authApp/docs
 ```
 
 ## Contributing
