@@ -6,12 +6,10 @@ ratelimiter:
     algorithm:
         token_bucket:
             active: enabled
-            # capacity: 10
-            # refresh_interval: 60000
             endpoints:
                 endpoint: limited
-                limit: 10
-                interval: 60000
+                limit: 5
+                interval: 60
         leaky_bucket_mirror:
             active: disabled
         leaky_bucket_queue:

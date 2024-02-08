@@ -1,6 +1,10 @@
 from abc import ABCMeta, abstractmethod
-from redis import RedisClient
-from context import _global_state, update_global_context, delete_global_context
+
+from fastapi import status as HttpStatus
+from starlette.responses import JSONResponse
+
+from context import _global_state, update_global_context
+from utils.redis import RedisClient
 
 
 class RateLimitStrategy(metaclass=ABCMeta):
@@ -14,14 +18,49 @@ class TokenBucketStrategy:
         try:
             kwargs = {"token_bucket_configuration": config}
             update_global_context(**kwargs)
-            print("Configuring token bucket configuration", config, _global_state)
-            delete_global_context(key="token_bucket_configuration")
-            print("reseting token bucket configuration", config, _global_state)
-            # redis_client = RedisClient()
-            # await redis_client.set_json(key='capacity',
-            #                             data=config.get('capacity', 0), expiry=config.get('refresh_interval', 0))
+            user_id = _global_state.get('user_state', {}).get('user_id', None)
+            endpoint = config.get('endpoints', {}).get('endpoint', None)
+            if endpoint and user_id:
+                redis_client = RedisClient()
+                cache = await redis_client.get_json(key=f'{user_id}#{endpoint}')
+                if not cache:
+                    # set the configuration in the cache
+                    await redis_client.set_json(key=f'{user_id}#{endpoint}',
+                                                data={
+                                                    'endpoint': endpoint,
+                                                    'capacity': config.get('endpoints', {}).get('limit', 0),
+                                                }, expiry=config.get('endpoints', {}).get('interval', 0))
+                    _global_state.get('user_state', {}).update({
+                        'capacity': config.get('endpoints', {}).get('limit', 0)
+                    })
+                    kwargs = {"user_state": _global_state.get(
+                        'user_state', {})}
+                    update_global_context(**kwargs)
+                else:
+                    # update the configuration
+                    limit = cache.get('capacity', 0)
+                    if limit:
+                        limit -= 1
+                        cache.update({'capacity': limit})
+                        await redis_client.set_json(key=f'{user_id}#{endpoint}', data=cache, expiry=config.get('endpoints', {}).get('interval', 0))
+                        _global_state.get('user_state', {}).update(
+                            {'capacity': limit})
+                        kwargs = {"user_state": _global_state.get(
+                            'user_state', {})}
+                        update_global_context(**kwargs)
+                        return HttpStatus.HTTP_202_ACCEPTED
+                    else:
+                        return HttpStatus.HTTP_429_TOO_MANY_REQUESTS
         except Exception as e:
-            print(e)
+            return JSONResponse(
+                content={
+                    "responseData": {},
+                    "message": [{"msg": f"Something went wrong {e}"}],
+                    "success": False,
+                    "code": HttpStatus.HTTP_400_BAD_REQUEST,
+                },
+                status_code=HttpStatus.HTTP_400_BAD_REQUEST,
+            )
 
 
 class LeakyBucketMirrorStrategy:
