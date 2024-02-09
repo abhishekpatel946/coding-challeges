@@ -8,7 +8,7 @@ ratelimiter:
             active: enabled
             endpoints:
                 endpoint: limited
-                limit: 5
+                limit: 50
                 interval: 60
         leaky_bucket_mirror:
             active: disabled
@@ -24,5 +24,4 @@ redis:
     environment:
         hostname: localhost
         port: 6379
-        interval: 60000
         label: development

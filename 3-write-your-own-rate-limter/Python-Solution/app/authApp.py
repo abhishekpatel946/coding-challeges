@@ -22,7 +22,7 @@ async def limited():
             "responseData": {},
             "message": f"Limited requests, Do not overuse me. Maximum request {_global_state['user_state']['capacity']} is allowed.",
             "success": False,
-            "code": HttpStatus.HTTP_429_TOO_MANY_REQUESTS,
+            "code": HttpStatus.HTTP_200_OK,
         },
-        status_code=HttpStatus.HTTP_429_TOO_MANY_REQUESTS,
+        status_code=HttpStatus.HTTP_200_OK,
     )

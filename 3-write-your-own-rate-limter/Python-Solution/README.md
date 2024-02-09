@@ -98,6 +98,14 @@ Open the rate limiting endpoint
 http://127.0.0.1:8000/authApp/docs
 ```
 
+## Report
+
+<object data="output/Rate-Limiter-performance-report.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="output/Rate-Limiter-performance-report.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="output/Rate-Limiter-performance-report.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
