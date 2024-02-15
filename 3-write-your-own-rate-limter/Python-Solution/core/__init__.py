@@ -22,14 +22,14 @@ class TokenBucketStrategy:
             endpoint = config.get('endpoints', {}).get('endpoint', None)
             if endpoint and user_id:
                 redis_client = RedisClient()
-                cache = await redis_client.get_json(key=f'{user_id}#{endpoint}')
+                cache = redis_client.get_json(key=f'{user_id}#{endpoint}')
                 if not cache:
                     # set the configuration in the cache
-                    await redis_client.set_json(key=f'{user_id}#{endpoint}',
-                                                data={
-                                                    'endpoint': endpoint,
-                                                    'capacity': config.get('endpoints', {}).get('limit', 0),
-                                                }, expiry=config.get('endpoints', {}).get('interval', 0))
+                    redis_client.set_json(key=f'{user_id}#{endpoint}',
+                                          data={
+                                              'endpoint': endpoint,
+                                              'capacity': config.get('endpoints', {}).get('limit', 0),
+                                          }, expiry=config.get('endpoints', {}).get('interval', 0))
                     _global_state.get('user_state', {}).update({
                         'capacity': config.get('endpoints', {}).get('limit', 0)
                     })
@@ -42,7 +42,8 @@ class TokenBucketStrategy:
                     if limit:
                         limit -= 1
                         cache.update({'capacity': limit})
-                        await redis_client.set_json(key=f'{user_id}#{endpoint}', data=cache, expiry=config.get('endpoints', {}).get('interval', 0))
+                        redis_client.set_json(key=f'{user_id}#{endpoint}', data=cache, expiry=config.get(
+                            'endpoints', {}).get('interval', 0))
                         _global_state.get('user_state', {}).update(
                             {'capacity': limit})
                         kwargs = {"user_state": _global_state.get(
