@@ -20,6 +20,8 @@ I’d love your feedback on the challenges and how I can make them better to hel
 
 | Index | Problem Statement | Solution's |
 | :---  |     :---          |   :---     |
-| 1     | [Write Your Own wc Tool](https://codingchallenges.fyi/challenges/challenge-wc) | [Python](./1-write-your-own-wc-tool/Python-Solution), [Go](1-write-your-own-wc-tool/Go-Solution)    |
+| 1     | [Write Your Own wc Tool](https://codingchallenges.fyi/challenges/challenge-wc) | [Python](./1-write-your-own-wc-tool/Python-Solution), [Golang](1-write-your-own-wc-tool/Go-Solution)    |
 | 2     | [Write Your Own Json Parser](https://codingchallenges.fyi/challenges/challenge-json-parser) | [Python](./2-write-your-own-json-parser/Python-Solution)|
 | 3     | [Write Your Own Rate Limiter](https://codingchallenges.fyi/challenges/challenge-rate-limiter) | [Python](./3-write-your-own-rate-limter/Python-Solution)|
+| 4     | [Write Your Consistent Algorigthm]() | [Python](./4-write-consistent-hashing/Python-Solution)|
+| 5     | [HTTP Protocol Understanding]() | [Golang](./5-write-http-protocol-understanding/Golang)|
