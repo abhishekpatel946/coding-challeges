@@ -74,6 +74,7 @@ Responses consist of the following elements:
 ## Few Examples with Raw HTTP Client using NetCat/NC
 
 - ### Getting the data '/foo' get endpoint with proper headers
+
 <style>
     table {
         border-collapse: collapse;
@@ -136,6 +137,7 @@ bar
 </table>
 
 - ### Getting the data '/foo' get endpoint with invalid headers
+
 <style>
     table {
         border-collapse: collapse;
@@ -192,6 +194,7 @@ Connection: close
 </table>
 
 - ### Writting the data '/login' get endpoint with valid headers but no body
+
 <style>
     table {
         border-collapse: collapse;
@@ -256,6 +259,7 @@ login successful...!!!
 </table>
 
 - ### Writting the data '/login' get endpoint with valid headers and body
+
 <style>
     table {
         border-collapse: collapse;
