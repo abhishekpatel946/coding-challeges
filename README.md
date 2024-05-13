@@ -1,20 +1,14 @@
-# coding-challeges
+# Coding Challenges with learning and building real-world projects
 
-Welcome to the Coding Challenges.
+Welcome to Coding Challenges!
 
-I share a weekly coding challenge aimed at helping software engineers level up their skills through deliberate practice.
+I provide a weekly coding challenge to help software engineers improve their skills through deliberate practice. These challenges are based on exercises that I have used or am using to learn new programming languages or technologies.
 
-These are challenges that I’ve used or am using as exercises to learn a new programming language or technology.
+Each challenge requires you to create a tool or application, most of which are based on real-world tools and utilities. The challenges are designed to be small enough to complete in your spare time over a week or two, yet large enough to be fully functional projects.
 
-Each challenge will have you writing a full application or tool. Most of which will be based on real world tools and utilities.
+Each challenge comes with an introduction explaining the challenge, along with a background section that provides a brief overview of any necessary background knowledge. This is followed by a detailed explanation of the challenge, as well as instructions and/or scripts to test your solution.
 
-The challenges are picked to be small enough to completed in your spare time over a week or two and yet large enough to be complete working projects.
-
-Each challenge is presented with an introduction explaining the challenge. Where applicable there is a background section providing a brief introduction to any background knowledge you need to complete the challenge.
-
-After that you get a detailed explanation of the challenge, followed by some instructions and/or scripts to run to test your solution.
-
-I’d love your feedback on the challenges and how I can make them better to help you level up as a software engineer.
+I value your feedback on the challenges and am always looking for ways to make them better, so please let me know how I can help you level up as a software engineer!
 
 ## The Coding Challenges
 
@@ -27,3 +21,26 @@ I’d love your feedback on the challenges and how I can make them better to hel
 | 5     | [HTTP Protocol Understanding](.) | [Golang](./5-understanding-http-protocol/Golang)|
 | 6     | [Write Your Own HTTP Server](.) | [Python](./6-write-your-own-http-server/Python-Solution/)|
 | 7     | [Bloom Filter Algorigthm Understanding](.) | [Python](./7-understading-bloom-filter-algorigthm/Python)|
+
+## Whitepapers Collection (Reading or Completed)
+
+I have curated a selection of whitepapers for you to peruse. These documents explore some of the most cutting-edge and captivating technologies, and I personally find them invaluable in my daily work. Moreover, I enjoy sharing them with others and integrating their algorithms and workflows into my own processes.
+
+| Index | Name
+| :---  |     :---          |
+| 1     | [Amazon dynamoDB NoSql Database](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf) |
+| 2     | [Google File System](https://static.googleusercontent.com/media/research.google.com/en//archive/gfs-sosp2003.pdf) |
+| 3     | [Firestore](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/d647cb73166040a82b7e5569574451be517f5c59.pdf) |
+| 4     | [Reading...](.) |
+
+## References
+
+[interviewReady - system-design-resources](https://github.com/InterviewReady/system-design-resources)
+
+[interviewReady - white-papers-worth-reading-for-software-engineers](https://github.com/InterviewReady/system-design-resources)
+
+[Coding Challenges](https://codingchallenges.fyi/challenges/intro)
+
+[system-design-interview-an-insiders-guide](https://blog.pragmaticengineer.com/system-design-interview-an-insiders-guide-review/)
+
+[The Software Engineer's Guidebook](https://www.engguidebook.com/)
