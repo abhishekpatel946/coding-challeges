@@ -102,6 +102,87 @@ Open the rate limiting endpoint
 http://127.0.0.1:8000/authApp/docs
 ```
 
+### Benchmarking
+
+1. System Configuration
+
+```bash
+    machdep.cpu.cores_per_package: 8
+    machdep.cpu.core_count: 8
+    machdep.cpu.logical_per_package: 8
+    machdep.cpu.thread_count: 8
+    machdep.cpu.brand_string: Apple M1
+```
+
+2. Generate a single UID using "/generate" endpoint (kind of brute-force approach)
+
+```bash
+docker run --rm draftdev/rt http://127.0.0.1:8000/authApp/generate
+```
+
+```bash
+          final_url:  http://127.0.0.1:8000/authApp/generate
+      response_code:  000s
+    time_namelookup:  0.002360s
+       time_connect:  0.000000s
+    time_appconnect:  0.000000s
+   time_pretransfer:  0.000000s
+      time_redirect:  0.000000s
+ time_starttransfer:  0.000000s
+                    ----------
+         time_total:  0.004291s
+```
+
+3. Generate a single UID using "/optimized-generate" endpoint (kind of more efficient approach)
+
+```bash
+docker run --rm draftdev/rt http://127.0.0.1:8000/authApp/optimized-generate
+```
+
+```bash
+          final_url:  http://127.0.0.1:8000/authApp/optimized-generate
+      response_code:  000s
+    time_namelookup:  0.002429s
+       time_connect:  0.000000s
+    time_appconnect:  0.000000s
+   time_pretransfer:  0.000000s
+      time_redirect:  0.000000s
+ time_starttransfer:  0.000000s
+                    ----------
+         time_total:  0.004139s
+```
+
+4. Generate a single UID using "/optimized-generate?total_num_ids=10000" endpoint (generate the 10,000 UID internally)
+
+```bash
+docker run --rm draftdev/rt http://127.0.0.1:8000/authApp/test/optimized-generate?total_num_ids=10000
+```
+
+```bash
+          final_url:  http://127.0.0.1:8000/authApp/test/optimized-generate?total_num_ids=10000
+      response_code:  000s
+    time_namelookup:  0.002531s
+       time_connect:  0.000000s
+    time_appconnect:  0.000000s
+   time_pretransfer:  0.000000s
+      time_redirect:  0.000000s
+ time_starttransfer:  0.000000s
+                    ----------
+         time_total:  0.009991s
+```
+
+5. Test with unittest to call the "test/optimized-generate" endpoint with below parameters:
+
+```bash
+<!-- test_optimized_api -->
+
+    run-unittest...
+    total no of request 10000 with concurrency 1
+    total duplicates are: 0 out of 10000
+    Successfully generated unique IDs, Generated 10000 IDs in 43.305 seconds
+
+```
+
 ### Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
