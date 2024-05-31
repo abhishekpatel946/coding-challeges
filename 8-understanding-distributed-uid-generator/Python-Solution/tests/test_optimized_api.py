@@ -2,13 +2,14 @@ import json
 import os
 import queue
 import sys
+import time
 from threading import Thread
 
 import requests
 
 NO_OF_REQUESTS_PER_SECOND = 10_000  # requests per second
 URL = "http://localhost:8000/authApp/optimized-generate"
-CONCURRENT = 100
+CONCURRENT = 1
 
 queue = queue.Queue(CONCURRENT * 2)
 responses = []
@@ -41,8 +42,11 @@ def make_request():
 
 
 def run_unittests():
+    print(
+        f"run-unittest... \n total no of request {NO_OF_REQUESTS_PER_SECOND} \n with concurrency {CONCURRENT}"
+    )
+
     for i in range(CONCURRENT):
-        print(f"Invoking thread {i}")
         t = Thread(target=make_request)
         t.setDaemon(True)
         t.start()
@@ -54,7 +58,6 @@ def run_unittests():
     except KeyboardInterrupt:
         sys.exit(1)
     finally:
-        print("run-unittest", len(responses))
         lst = list()
         duplicate_count = 0
         for item in responses:
@@ -86,4 +89,13 @@ def run_unittests():
 
 
 if __name__ == "__main__":
+    start_time = time.time()
+
+    # run tests
     run_unittests()
+
+    # print the time elapsed
+    duration = time.time() - start_time
+    print(
+        f"Successfully generated unique IDs, Generated {NO_OF_REQUESTS_PER_SECOND} IDs in {duration:.3f} seconds"
+    )

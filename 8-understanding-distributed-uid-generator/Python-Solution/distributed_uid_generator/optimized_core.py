@@ -1,5 +1,5 @@
-import time
 import threading
+import time
 
 # Constants for Snowflake
 EPOCH = int(
@@ -100,8 +100,9 @@ class TestSnowflakeGenerator:
         start_time = time.time()
         if self.test_high_throughput():
             duration = time.time() - start_time
-            print(f"Successfully generated unique IDs, Generated {self.num_ids} IDs in {duration:.3f} seconds")
+            print(
+                f"Successfully generated unique IDs, Generated {self.num_ids} IDs in {duration:.3f} seconds"
+            )
             return duration
         else:
             print("Failed to generate unique IDs.")
-
