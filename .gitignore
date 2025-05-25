@@ -160,6 +160,6 @@ cython_debug/
 #.idea/
 /1-write-your-own-wc-tool/C#-Solution/ccwc/.vs/
 /1-write-your-own-wc-tool/C#-Solution/ccwc/obj/
-
+/1-write-your-own-wc-tool/C#-Solution/ccwc/bin/Debug
 /obj
 /Debug
