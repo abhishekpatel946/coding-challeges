@@ -21,6 +21,8 @@ I value your feedback on the challenges and am always looking for ways to make t
 | 5     | [HTTP Protocol Understanding](.) | [Golang](./5-understanding-http-protocol/Golang)|
 | 6     | [Write Your Own HTTP Server](.) | [Python](./6-write-your-own-http-server/Python-Solution/)|
 | 7     | [Bloom Filter Algorigthm Understanding](.) | [Python](./7-understading-bloom-filter-algorigthm/Python)|
+| 8     | [Distributed UID generator](.) | [Python](./8-understanding-distributed-uid-generator/Python-Solution/)|
+| 9     | [Design URL shortener](.) | [Python](./9-understanding-url-shortener/Golang-Solution/)|
 
 ## Whitepapers Collection (Reading or Completed)
 
